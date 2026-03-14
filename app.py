@@ -28,12 +28,23 @@ if uploaded_file:
 
     st.subheader("Demand Pattern")
 
+    import matplotlib.dates as mdates
+
     fig, ax = plt.subplots()
 
-    ax.plot(data["date"], demand, marker="o")
+    ax.plot(data["date"], demand, marker="o", linewidth=1)
 
+    ax.set_title("Demand History")
     ax.set_xlabel("Date")
     ax.set_ylabel("Demand")
+
+    # format date ticks
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
+
+    plt.xticks(rotation=45)
+
+    plt.tight_layout()
 
     st.pyplot(fig)
 
